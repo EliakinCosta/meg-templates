@@ -1,0 +1,6 @@
+{
+    "menuName": "Conferences",
+    "icon": "university",
+    "mainPage": "conferences.qml",
+    "itemHead": "name"
+}
