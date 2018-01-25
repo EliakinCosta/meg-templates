@@ -12,12 +12,12 @@ Item {
     }
 
     Connections {
-            target: appWindow
-            onEventNotified: {                
-                if (eventName === "updateConferencesModel"){
-                    conferencesJsonListModel.load()
-                }
+        target: appWindow
+        onEventNotified: {
+            if (eventName === "updateConferencesModel"){
+                conferencesJsonListModel.load()
             }
+        }
     }
 
     JSONListModel {
@@ -30,10 +30,15 @@ Item {
         }
     }
 
+    Settings {
+        id: settings
+        property var conferencesModel
+    }
+
     BusyIndicator {
         width: parent.width * 0.20
         height: parent.width * 0.20
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.centerIn: parent
         running: conferencesJsonListModel.state === "loading"
     }
 
@@ -62,12 +67,7 @@ Item {
         onClicked: {
             _stackView.push(_stackView.editPage, {"stackView": _stackView })
         }
-    }
-
-    Settings {
-        id: settings
-        property var conferencesModel
-    }
+    }    
 
     Component.onCompleted: {
         if (settings.conferencesModel === undefined)

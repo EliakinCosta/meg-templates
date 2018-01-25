@@ -9,6 +9,12 @@ import Awesome 1.0
 ApplicationWindow {
     id: appWindow    
 
+    onEventNotified: {
+        if (eventName === "openDrawer"){
+            drawer.open()
+        }
+    }
+
     property var stacks: []
     property alias currentIndex: swipeView.currentIndex
     property var currentStack: stacks[currentIndex]
@@ -32,15 +38,6 @@ ApplicationWindow {
         property string baseServer: "http://eliakimdjango.pythonanywhere.com"
     }
 
-    Connections {
-            target: appWindow
-            onEventNotified: {
-                if (eventName === "openDrawer"){
-                    drawer.open()
-                }
-            }
-    }
-
     header: CustomToolBar {
         id: toolbar
         width: parent.width
@@ -50,8 +47,10 @@ ApplicationWindow {
         id: drawer
         width: parent.width*2/3
         height: parent.height
+
         Column {
             anchors.fill: parent
+
             Rectangle {
                 width: drawer.width
                 height: appWindow.height / 3
@@ -68,6 +67,7 @@ ApplicationWindow {
                     color: "white"
                 }
             }
+
             ListView {
                 width: parent.width
                 height: 2 * (appWindow.height / 3)
@@ -90,7 +90,6 @@ ApplicationWindow {
         }
     }
 
-
     SwipeView {
         id: swipeView
         anchors.fill: parent
@@ -112,6 +111,7 @@ ApplicationWindow {
         id: tabBar
         width: parent.width
         currentIndex: swipeView.currentIndex
+
         Repeater {
             model: contents
             TabButton { text: modelData.menuName }

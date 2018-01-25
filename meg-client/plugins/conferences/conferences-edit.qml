@@ -13,14 +13,18 @@ Item {
         "label": {"text":"New Conference", "bold": false, "color": "white"},
         "toolButton1": {"action":stackView.pop, "icon":"arrow-left"}
     }
+    property var formFields: [{"name": "acronym", "type": "string"},
+                              {"name": "name", "type": "string"},
+                              {"name": "city", "type": "string"},
+                              {"name": "country", "type": "string"},
+                              {"name": "venue", "type": "string"},
+                              {"name": "start_date", "type": "date"},
+                              {"name": "end_date", "type": "date"}]
 
     JSONListModel {
         id: addConferenceJsonListModel
         source: internal.baseServer + "/add_conferences"
-        requestObject: {"acronym": acronymTextField.text, "name": nameTextField.text,
-                        "city": cityTextField.text, "country": countryTextField.text,
-                        "venue": venueTextField.text, "start_date": start_dateTextField.text,
-                        "end_date": end_dateTextField.text}
+        requestObject: form.cleanedForm
         requestMethod: "POST"
         onStateChanged: {
             if (state === "ready" && httpStatus == 200) {
@@ -38,103 +42,19 @@ Item {
     BusyIndicator {
         width: parent.width * 0.20
         height: parent.width * 0.20
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.centerIn: parent
         running: addConferenceJsonListModel.state === "loading"
     }
 
-    Flickable {
-        id: flickable
-        visible: addConferenceJsonListModel.state !== "loading"
-        clip: true
-        anchors {
-            left: parent.left; right: parent.right; top: parent.top; bottom: parent.bottom;
-            leftMargin: 6; rightMargin: 6; topMargin: 6; bottomMargin: 6
-        }
-        flickableDirection: Flickable.VerticalFlick
-        contentHeight: contentColumn.height
-        contentWidth: contentColumn.width
-
-        Column {
-            id: contentColumn
-            width: parent.width
-            padding: pluginInternal.padding
-            spacing: 15
-            Column {
-                width: flickable.width
-                Label {
-                    text: "Acronym" + ":"
-                }
-                TextField {
-                    id: acronymTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Column {
-                width: flickable.width
-                Label {
-                    text: "Name" + ":"
-                }
-                TextField {
-                    id: nameTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Column {
-                width: flickable.width
-                Label {
-                    text: "City" + ":"
-                }
-                TextField {
-                    id: cityTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Column {
-                width: flickable.width
-                Label {
-                    text: "Country" + ":"
-                }
-                TextField {
-                    id: countryTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Column {
-                width: flickable.width
-                Label {
-                    text: "Venue" + ":"
-                }
-                TextField {
-                    id: venueTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Column {
-                width: flickable.width
-                Label {
-                    text: "Start_date" + ":"
-                }
-                TextField {
-                    id: start_dateTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Column {
-                width: flickable.width
-                Label {
-                    text: "End_date" + ":"
-                }
-                TextField {
-                    id: end_dateTextField
-                    width: parent.width-2*pluginInternal.padding
-                }
-            }
-            Button {
-                text: "Salvar"
-                onClicked: {
-                    addConferenceJsonListModel.load()                    
-                }
-            }
-        }
+    BaseForm {
+        id: form
+        active: addConferenceJsonListModel.state !== "loading"
+        padding: pluginInternal.padding
+        fieldsProperties: formFields
+        onSubmit: addConferenceJsonListModel.load()
+        width: parent.width
+        height: parent.height
+        readOnly: false
     }
+
 }

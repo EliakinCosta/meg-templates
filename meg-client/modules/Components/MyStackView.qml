@@ -18,7 +18,7 @@ StackView {
             width: parent.width
             
             AwesomeToolButton {
-                text: FontAwesome.icons[icon]
+                text: FontAwesome.icons[stackView.icon]
                 enabled: false
             }
             onClicked: {
