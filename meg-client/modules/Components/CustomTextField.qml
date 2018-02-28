@@ -6,11 +6,8 @@ Item {
     height: childrenRect.height
 
     property bool readOnly
-    property string text: textField.text
-
-    function setText(_text) {
-        textField.text = _text;
-    }
+    property string text
+    property string value: textField.text
 
     TextField {
         id: textField

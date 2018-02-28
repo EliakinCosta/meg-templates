@@ -4,8 +4,7 @@ import Awesome 1.0
 
 StackView {
     property alias model: listView.model
-    property string itensPage
-    property string editPage
+    property string itensPage    
     property string itemHead
     property string icon    
 
@@ -22,7 +21,7 @@ StackView {
                 enabled: false
             }
             onClicked: {
-                stackView.push(itensPage, { "model": stackView.model[index], "stackView": stackView })
+                stackView.push(itensPage, { "model": stackView.model[index], "stackView": stackView, "state": "details" })
             }
         }
     }

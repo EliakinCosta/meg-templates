@@ -14,7 +14,6 @@ ApplicationWindow {
             drawer.open()
         }
     }
-
     property var stacks: []
     property alias currentIndex: swipeView.currentIndex
     property var currentStack: stacks[currentIndex]

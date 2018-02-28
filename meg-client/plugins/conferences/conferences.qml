@@ -47,9 +47,8 @@ Item {
         visible: conferencesJsonListModel.state !== "loading"
         anchors.fill: parent
         model: settings.conferencesModel
-        itemHead: contents[index].itemHead
-        itensPage: pluginsDir + "/conferences/conferences-detail.qml"
-        editPage: pluginsDir + "/conferences/conferences-edit.qml"
+        itemHead: contents[index].itemHead        
+        itensPage: pluginsDir + "/conferences/conferences-detail.qml"        
         icon: contents[index].icon
     }
 
@@ -65,7 +64,7 @@ Item {
                 rightMargin: 16
         }
         onClicked: {
-            _stackView.push(_stackView.editPage, {"stackView": _stackView })
+            _stackView.push(_stackView.itensPage, {"stackView": _stackView, "state": "add", "model": ({}) })
         }
     }    
 

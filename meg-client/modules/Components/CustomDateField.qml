@@ -6,18 +6,9 @@ Item {
     height: childrenRect.height
 
     property bool readOnly
-    property string text: "{0}/{1}/{2}".replace("{0}", daysTumbler.currentIndex + 1).replace("{1}", monthsTumbler.currentIndex + 1).replace("{2}", yearTumbler.currentItem.text)
+    property string text
+    property string value: "{0}/{1}/{2}".replace("{0}", daysTumbler.currentIndex + 1).replace("{1}", monthsTumbler.currentIndex + 1).replace("{2}", yearTumbler.currentItem.text)
     property var dateField
-
-    function setText(value) {
-        if (value) {
-            var from = value.split("/");
-            var jsDate = new Date(from[2], from[1] - 1, from[0]);
-            item.dateField = jsDate;
-        } else {
-            item.dateField = new Date();
-        }
-    }
 
     Rectangle {
         width: row.width
@@ -71,6 +62,15 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                 }
             }
+        }
+    }
+    Component.onCompleted: {
+        if (text && text !== '') {
+            var from = text.split("/");
+            var jsDate = new Date(from[2], from[1] - 1, from[0]);
+            item.dateField = jsDate;
+        } else {            
+            item.dateField = new Date();
         }
     }
 }

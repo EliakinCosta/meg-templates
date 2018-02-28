@@ -12,7 +12,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>icons/menu.png</file>
         <file>icons/more_vert.png</file>
-        <file>modules/Components/BaseForm.qml</file>
         <file>modules/Components/CustomTextField.qml</file>
         <file>modules/Components/CustomDateField.qml</file>
     </qresource>
