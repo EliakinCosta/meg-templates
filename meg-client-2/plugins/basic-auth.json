@@ -1,0 +1,10 @@
+{
+    "type": "auth",    
+    "mainPage": "login.qml",
+    "authPlugin": true,
+    "menuName": "Logout",
+    "icon": "sign-out",
+    "extraPage": "logout.qml",
+    "showInSwipeView": false,
+    "showInDrawer": true
+}
