@@ -1,0 +1,12 @@
+{
+    "name": "gustavo",
+    "type": "normal",
+    "menuName": "Gustavo",
+    "icon": "university",
+    "mainPage": "gustavo.qml",
+    "itemHead": "city",
+    "showInSwipeView": true,
+    "showInDrawer": true,
+    "drawerPosition": 2,
+    "swipeViewPosition": 2
+} 
